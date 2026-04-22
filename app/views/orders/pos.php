@@ -4,7 +4,7 @@
 <div>
     <h2>Products</h2>
         <?php while($row = $products->fetch_assoc()): ?>
-            <button onclick="addToCart(<?= $row['id'] ?>, '<?= $row['name'] ?>', <?= $row['price'] ?>)">
+            <button onclick="addToCart(<?= $row['id'] ?>, '<?= $row['name']; ?>', <?= $row['price'] ?>)">
             <?= $row['name']; ?> - P <?= $row['price']; ?></button>
             <br><br>
             <?php endwhile; ?>
@@ -55,6 +55,7 @@ function renderCart() {
 }
 
 function checkout() {
+
     fetch('index.php?url=orders/store', {
         method: 'POST',
         headers: {
@@ -67,9 +68,19 @@ function checkout() {
     })
     .then(res => res.text())
     .then(data => {
-        alert("Order saved");
-        cart = [];
-        renderCart();
+
+        console.log("RESPONSE:", data);
+
+        if(data && data !== "SUCCESS"){
+            window.location.href = "index.php?url=orders/receipt&id=" + data;
+        } else {
+            alert("Order saved but no ID returned");
+        }
+
+    })
+    .catch(err => {
+        console.error("ERROR:", err);
+        alert("Checkout failed");
     });
 }
 

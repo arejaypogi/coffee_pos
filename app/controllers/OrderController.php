@@ -45,8 +45,33 @@ class OrderController {
         $product->reduceStock($item['id'], $item['qty']);
     }
 
-    echo "SUCCESS";
+        echo "order_id";
 }
+
+
+
+    public function index(){
+        $db = new Databse();
+        $conn = $db->connect();
+
+        $order = $conn->query("SELECT * FROM orders ORDER BY id DESC");
+
+        require '../app/views/orders/index.php';
+    }
+
+public function updateStatus(){
+    $id = $_GET['id'];
+    $status =$_GET['status'];
+
+    $db = new Database();
+    $conn = $db->connect();
+
+    $conn->query("UPDATE orders SET status='$status' WHERE id=$id");
+
+    header("Location: index.php?url=orders");
+}
+
+
 }
 
 

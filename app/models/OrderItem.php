@@ -11,9 +11,9 @@ class OrderItem {
     }
 
     public function create($order_id, $product_id, $qty, $price){
-        $stmt = $this->db->prepare("INSERT INTO order_items (order_id, product_id, qty, price) VALUES (?, ?, ?, ?)"
+        $stmt = $this->db->prepare("INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)"
     );
-        $stmt->bind_param("iiid", $order_id, $product_id, $qty, $price);
+        $stmt->bind_param("iiid", $order_id, $product_id, $quantity, $price);
         return $stmt->execute();
         }
 }

@@ -23,11 +23,11 @@ class Product {
         return $stmt->execute();
     }
 
-    public function reduceStock($id, $qty) {
+    public function reduceStock($id, $quantity) {
         $stmt = $this->db->prepare("
         UPDATE products SET stock = stock - ? WHERE id = ?");
 
-        $stmt->bind_param("ii", $sqty, $id);
+        $stmt->bind_param("ii", $qty, $id);
         return $stmt->execute();
     }
 }
