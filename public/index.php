@@ -4,6 +4,7 @@ session_start();
 require_once '../app/controllers/ProductController.php';
 require_once '../app/controllers/OrderController.php';
 require_once '../app/controllers/ReceiptController.php';
+require_once '../app/config/database.php';
 
 $url = $_GET['url'] ?? '';
 
@@ -36,6 +37,21 @@ case 'orders/receipt':
 case 'orders/store':
     $controller = new OrderController();
     $controller->store();
+    break;
+
+case 'orders/index':
+    $controller = new ReceiptController();
+    $controller->order_queue();
+    break;
+
+case 'orders/updateStatus':
+    $controller = new OrderController();
+    $controller->updateStatus();
+    break;
+
+case 'orders':
+    $controller = new ReceiptController();
+    $controller->order_queue();
     break;
 
 var_dump($url);

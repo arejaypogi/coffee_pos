@@ -27,7 +27,7 @@ class Product {
         $stmt = $this->db->prepare("
         UPDATE products SET stock = stock - ? WHERE id = ?");
 
-        $stmt->bind_param("ii", $qty, $id);
+        $stmt->bind_param("ii", $quantity, $id);
         return $stmt->execute();
     }
 }

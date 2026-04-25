@@ -5,7 +5,7 @@ require_once "../app/models/OrderItem.php";
 require_once "../app/models/Product.php";
 require_once "../app/config/database.php";
 
-class ReceiptController {
+class ReceiptController{
 
     public function receipt() {
         $order_id = $_GET['id'];
@@ -26,6 +26,14 @@ class ReceiptController {
     require '../app/views/orders/receipt.php';
     }
 
+    public function order_queue(){
+        $db = new Database();
+        $conn = $db->connect();
+
+        $orders = $conn->query("SELECT * FROM orders");
+
+        require '../app/views/orders/index.php';
+    }
 
 }
 

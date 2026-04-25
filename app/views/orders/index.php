@@ -8,7 +8,7 @@
         <th>Action</th>
     </tr>
 
-<?php while($row = $orders->fetch_assoc()); ?>
+<?php while($row = $orders->fetch_assoc()): ?>
 <tr>
     <td><?= $row['id']; ?></td>
     <td><?= $row['total_amount']; ?></td>

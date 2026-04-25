@@ -10,7 +10,7 @@ class OrderItem {
         $this->db = $database->connect();
     }
 
-    public function create($order_id, $product_id, $qty, $price){
+    public function create($order_id, $product_id, $quantity, $price){
         $stmt = $this->db->prepare("INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)"
     );
         $stmt->bind_param("iiid", $order_id, $product_id, $quantity, $price);

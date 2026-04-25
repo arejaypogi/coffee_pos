@@ -2,6 +2,7 @@
 
 <a href="index.php?url=products/create">Add Product</a> <br>
 <a href="index.php?url=orders/create"> Add to Cart</a>
+<a href="index.php?url=orders/index"> Order Queue</a>
 
 <table border="1">
 <tr>

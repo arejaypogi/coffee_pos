@@ -45,13 +45,12 @@ class OrderController {
         $product->reduceStock($item['id'], $item['qty']);
     }
 
-        echo "order_id";
+        echo $order_id;
 }
 
 
-
     public function index(){
-        $db = new Databse();
+        $db = new Database();
         $conn = $db->connect();
 
         $order = $conn->query("SELECT * FROM orders ORDER BY id DESC");
@@ -60,17 +59,20 @@ class OrderController {
     }
 
 public function updateStatus(){
+
     $id = $_GET['id'];
-    $status =$_GET['status'];
+    $status = $_GET['status'];
 
     $db = new Database();
     $conn = $db->connect();
 
-    $conn->query("UPDATE orders SET status='$status' WHERE id=$id");
+    $stmt = $conn->prepare("UPDATE orders SET status = ? WHERE id = ?");
+    $stmt->bind_param("si", $status, $id);
+    $stmt->execute();
 
     header("Location: index.php?url=orders");
+    exit;
 }
-
 
 }
 
