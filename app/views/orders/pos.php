@@ -1,24 +1,68 @@
-<h1>POS</h1>
+<?php 
+require_once '../app/views/layouts/header.php';
+?>
 
-<div style="display: flex; gap: 50px;">
-<div>
-    <h2>Products</h2>
-        <?php while($row = $products->fetch_assoc()): ?>
-            <button onclick="addToCart(<?= $row['id'] ?>, '<?= $row['name']; ?>', <?= $row['price'] ?>)">
-            <?= $row['name']; ?> - P <?= $row['price']; ?></button>
-            <br><br>
+<h1 style="margin-bottom:20px;">Coffee POS System</h1>
+
+<div style="display:flex; gap:20px;">
+
+    <!-- PRODUCTS -->
+    <div style="flex:1; background:#f9f9f9; padding:20px; border-radius:10px;">
+
+        <h2 style="margin-bottom:15px;">Products</h2>
+
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+
+            <?php while($row = $products->fetch_assoc()): ?>
+                <button
+                    onclick="addToCart(<?= $row['id'] ?>, '<?= $row['name']; ?>', <?= $row['price'] ?>)"
+                    style="
+                        padding:10px;
+                        border:none;
+                        background:#4CAF50;
+                        color:white;
+                        border-radius:8px;
+                        cursor:pointer;
+                        min-width:120px;
+                    "
+                >
+                    <?= $row['name']; ?><br>
+                    <small>P<?= $row['price']; ?></small>
+                </button>
             <?php endwhile; ?>
+
+        </div>
+
+    </div>
+
+    <!-- CART -->
+    <div style="width:300px; background:#fff; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1);">
+
+        <h2>Cart</h2>
+
+        <ul id="cart" style="list-style:none; padding:0; min-height:150px;"></ul>
+
+        <hr>
+
+        <h3>Total: P <span id="total">0</span></h3>
+
+        <button onclick="checkout()"
+                style="
+                    width:100%;
+                    padding:10px;
+                    background:#2196F3;
+                    color:white;
+                    border:none;
+                    border-radius:8px;
+                    cursor:pointer;
+                    margin-top:10px;
+                ">
+            Checkout
+        </button>
+
+    </div>
+
 </div>
-
-            <div>
-                <h2>Cart</h2>
-                <ul id="cart"></ul>
-                <h3>Total: P <span id="total">0</h3>
-
-                <button onclick="checkout()">Checkout</button>
-            </div>
-</div>
-
 
 <script>
 let cart = [];

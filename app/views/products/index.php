@@ -1,22 +1,43 @@
-<h1>Products</h1>
+<?php 
+require_once '../app/views/layouts/header.php';
+?>
 
-<a href="index.php?url=products/create">Add Product</a> <br>
-<a href="index.php?url=orders/create"> Add to Cart</a>
-<a href="index.php?url=orders/index"> Order Queue</a>
+<h1 style="margin-bottom: 20px;">Products</h1>
 
-<table border="1">
-<tr>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Stock</th>
-</tr>
+<div style="margin-bottom: 20px; display: flex; gap: 10px;">
 
-<?php while($row = $products->fetch_assoc()): ?>
-<tr>
-    <td><?= $row['name']; ?></td>
-    <td><?= $row['price']; ?></td>
-    <td><?= $row['stock']; ?></td>
-</tr>
-<?php endwhile; ?>
+    <a href="index.php?url=products/create"
+       style="padding:10px 15px; background:#4CAF50; color:white; text-decoration:none; border-radius:5px;">
+        + Add Product
+    </a>
+
+    <a href="index.php?url=orders/create"
+       style="padding:10px 15px; background:#2196F3; color:white; text-decoration:none; border-radius:5px;">
+        Add to Cart
+    </a>
+
+    <a href="index.php?url=orders/index"
+       style="padding:10px 15px; background:#FF9800; color:white; text-decoration:none; border-radius:5px;">
+        Order Queue
+    </a>
+
+</div>
+
+<table border="1" style="width:100%; border-collapse:collapse; text-align:left;">
+    <tr style="background:#333; color:white;">
+        <th style="padding:10px;">Name</th>
+        <th style="padding:10px;">Price</th>
+        <th style="padding:10px;">Stock</th>
+    </tr>
+
+    <?php while($row = $products->fetch_assoc()): ?>
+    <tr>
+        <td style="padding:10px;"><?= $row['name']; ?></td>
+        <td style="padding:10px;">P<?= $row['price']; ?></td>
+        <td style="padding:10px; <?= $row['stock'] <= 5 ? 'color:red;font-weight:bold;' : ''; ?>">
+            <?= $row['stock']; ?>
+        </td>
+    </tr>
+    <?php endwhile; ?>
 
 </table>
