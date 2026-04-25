@@ -1,5 +1,7 @@
 <?php
 
+
+require_once '../app/core/Auth.php';
 require_once '../app/config/database.php';
 require_once '../app/models/Product.php';
 require_once '../app/models/Order.php';
@@ -8,6 +10,13 @@ require_once '../app/models/OrderItem.php';
 class DashboardController {
     
     public function index(){
+
+        Auth::check();
+        if(!Auth::isAdmin()){
+            echo "Access denied";
+            exit;
+        }
+
         $db = new Database();
         $conn = $db->connect();
 
@@ -22,6 +31,15 @@ class DashboardController {
 
         require '../app/views/dashboard/index.php';
         }
+
+    public function create(){
+        Auth::check();
+
+        if(!Auth::isCashier()){
+            echo "Access denied";
+            exit;
+        }
+    }
 
 }
 
