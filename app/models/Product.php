@@ -30,4 +30,18 @@ class Product {
         $stmt->bind_param("ii", $quantity, $id);
         return $stmt->execute();
     }
+
+    public function find($id){
+    $stmt = $this->db->prepare("SELECT * FROM products WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_assoc();
+}
+
+    public function updateStock($id, $stock){
+        $stmt = $this->db->prepare("UPDATE products SET stock = ? WHERE id = ?");
+        $stmt->bind_param("ii", $stock, $id);
+        return $stmt->execute();
+    }
+
 }

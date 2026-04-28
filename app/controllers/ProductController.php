@@ -29,4 +29,39 @@ class ProductController {
 
         header("Location: index.php?url=products");
     }
+
+    public function edit() {
+        $id = $_GET['id'];
+
+        $product = new Product();
+        $data = $product->find($id);
+
+        require '../app/views/products/edit.php';
+    }
+
+    public function updateStock (){
+        $id = $_POST['id'];
+        $newStock = $_POST['stock'];
+
+        $product = new Product();
+        
+        //get old products
+        $old = $product->find($id)['stock'];
+
+        $product->updateStock($id, $newStock);
+
+        //log inventory
+        $diff = $newStock - $old;
+
+        $db = new  Database();
+        $conn = $db->connect();
+
+        $type = $diff>0 ? 'in' : 'out';
+        $qty = abs($diff);
+
+        $conn->query("INSERT INTO inventory_logs (product_id, type, quantity)
+        VALUES ($id, '$type', $qty)");
+
+        header ("Location: index.php?url=products");
+    }
 }

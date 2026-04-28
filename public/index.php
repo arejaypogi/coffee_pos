@@ -60,6 +60,15 @@ case 'dashboard':
     $controller->index();
     break;
 
+case 'products/edit':
+    $controller = new ProductController();
+    $controller->edit();
+break;
+
+case 'products/updateStock':
+    $controller = new ProductController();
+    $controller->updateStock();
+break;
 var_dump($url);
 
 }

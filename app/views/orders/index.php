@@ -2,7 +2,7 @@
 
 <h1 style="margin-bottom: 20px;">Order Queue</h1>
 
-<table border="1" style="width:100%; border-collapse:collapse;">
+<table border="1" style="width:100%; border-collapse:collapse; text-align:left;">
     
     <tr style="background:#333; color:#fff;">
         <th style="padding:10px;">ID</th>

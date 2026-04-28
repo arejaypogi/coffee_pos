@@ -1,3 +1,14 @@
+<?php
+
+$current = $_GET['url'] ?? 'dashboard';
+?>
+
+<?php
+function isActive($route, $current){
+    return $route == $current ? 'text-blue-600 font-bold' : 'text-gray-600';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,25 +32,30 @@
     <!-- CENTER: Links -->
     <div class="space-x-4 text-sm">
 
-        <a href="index.php?url=dashboard" class="text-gray-600 hover:text-black">
-            Dashboard
-        </a>
+        <a href="index.php?url=dashboard" 
+   class="<?= isActive('dashboard', $current); ?> hover:text-black">
+   Dashboard
+</a>
 
-        <a href="index.php?url=products" class="text-gray-600 hover:text-black">
-            Products
-        </a>
+<a href="index.php?url=products" 
+   class="<?= isActive('products', $current); ?> hover:text-black">
+   Products
+</a>
 
-        <a href="index.php?url=orders/create" class="text-gray-600 hover:text-black">
-            POS
-        </a>
+<a href="index.php?url=orders/create" 
+   class="<?= isActive('orders/create', $current); ?> hover:text-black">
+   POS
+</a>
 
-        <a href="index.php?url=orders" class="text-gray-600 hover:text-black">
-            Orders
-        </a>
+<a href="index.php?url=orders" 
+   class="<?= isActive('orders', $current); ?> hover:text-black">
+   Orders
+</a>
 
-        <a href="index.php?url=reports" class="text-gray-600 hover:text-black">
-            Reports
-        </a>
+<a href="index.php?url=reports" 
+   class="<?= isActive('reports', $current); ?> hover:text-black">
+   Reports
+</a>
 
     </div>
 

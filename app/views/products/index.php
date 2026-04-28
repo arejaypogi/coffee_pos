@@ -8,9 +8,9 @@ require_once '../app/views/layouts/header.php';
 
     <a href="index.php?url=products/create"
        style="padding:10px 15px; background:#4CAF50; color:white; text-decoration:none; border-radius:5px;">
-        + Add Product
+        Add Product
     </a>
-
+    
     <a href="index.php?url=orders/create"
        style="padding:10px 15px; background:#2196F3; color:white; text-decoration:none; border-radius:5px;">
         Add to Cart
@@ -28,6 +28,7 @@ require_once '../app/views/layouts/header.php';
         <th style="padding:10px;">Name</th>
         <th style="padding:10px;">Price</th>
         <th style="padding:10px;">Stock</th>
+        <th style="padding:10px;">Edit</th>
     </tr>
 
     <?php while($row = $products->fetch_assoc()): ?>
@@ -36,6 +37,12 @@ require_once '../app/views/layouts/header.php';
         <td style="padding:10px;">P<?= $row['price']; ?></td>
         <td style="padding:10px; <?= $row['stock'] <= 5 ? 'color:red;font-weight:bold;' : ''; ?>">
             <?= $row['stock']; ?>
+        </td>
+        <td>
+            <a href="index.php?url=products/edit&id=<?= $row['id']; ?>"
+   class="inline-block bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded">
+   Edit
+</a>
         </td>
     </tr>
     <?php endwhile; ?>
